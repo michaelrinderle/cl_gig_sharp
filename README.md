@@ -1,0 +1,2 @@
+# CL_GIG_SHARP
+Scrape all Craiglist computer gigs around the  globe in c# (use with discretion, can rally over 20k leads)) output is html for browsing. If you want to search for more sites to update site.txt, run $UpdateSubCities as true and the save file absolute path in Constants.cs, then re-compile. When scrape is finished, there is an html outfile file to view and view in extra tabs while browsing. Very convienent for browsing through 20k of potential leads from craigslist with very minimal scrape footprint against Craigslist.
