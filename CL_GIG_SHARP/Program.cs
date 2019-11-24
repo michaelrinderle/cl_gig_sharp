@@ -13,12 +13,8 @@ namespace CL_GIG_SHARP
         static List<Gig> Gigs { get; set; } = new List<Gig>();
         static int GigCount { get; set; }
 
-
-
         static void Main(string[] args)
         {
-            
-
             // load city text file
             Cities = SitesLoader.LoadCities();
 
@@ -32,11 +28,8 @@ namespace CL_GIG_SHARP
                 GigCount += gcg.Gigs.Count;
                 Console.WriteLine($"[*] {Gigs.Count} cities crawled @ {GigCount} gigs");
                 Thread.Sleep(1000);
-
             }
-
-            CreateHTML();
-            
+            CreateHTML();            
         }
 
         public static void CreateHTML()

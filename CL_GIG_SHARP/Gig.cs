@@ -28,7 +28,7 @@ namespace CL_GIG_SHARP
             
             // search areaAbb for more sites in select 
             if(Program.UpdateSubCities)
-                ScrapeSubCities();
+                ScrapeSubAreas();
             
             // scrape out href tags and outer html
             Nodes = Document.DocumentNode.SelectNodes("//a[contains(@class, 'hdrlnk')]");
@@ -40,23 +40,24 @@ namespace CL_GIG_SHARP
             }
         }
 
-        private void ScrapeSubCities()
+        private void ScrapeSubAreas()
         {
-            // scrape out sub cities from 
-            var areas = Document.DocumentNode.SelectSingleNode("//select[@id='areaAbb']");
-            if (areas == null) return;     
-            List<string> cities = areas.Descendants("option")
-                                                  .Skip(1)
-                                                  .Select(n =>  n.Attributes["value"].Value)
-                                                  .ToList();
+            // scrape out sub area from gig site
+            // re-run after running a sub area scrap to update site txt
+            var sites = Document.DocumentNode.SelectSingleNode("//select[@id='areaAbb']");
+            if (sites == null) return;     
+            List<string> areas = sites.Descendants("option")
+                                                        .Skip(1)
+                                                        .Select(n =>  n.Attributes["value"].Value)
+                                                        .ToList();
 
-            List<string> newSites = new List<string>();
-            foreach(var city in cities)
+            List<string> newAreas = new List<string>();
+            foreach(var area in areas)
             {
-                if(Program.Cities.Contains(city))
-                    newSites.Add(city);
+                if(!Program.Cities.Contains(area))
+                    newAreas.Add(area);
             }
-            if (newSites.Count > 0) SitesLoader.AppendCities(newSites);
+            if (newAreas.Count > 0) SitesLoader.AppendCities(newAreas);
         }
     }
 }
